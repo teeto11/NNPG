@@ -22,17 +22,17 @@ export class UserService {
     return allUserPost;
   }
 
-  async getUser(id: number) {
-    const allPost = await this.prismaService.user.findUnique({
+  async getUser(id: number):Promise<User> {
+    const user = await this.prismaService.user.findUnique({
       where: {
         id,
       },
     });
-    console.log(allPost);
-    return allPost;
+    console.log(user);
+    return user;
   }
 
-  async getUserBlog(userId: number) {
+  async getUserBlog(userId: number):Promise<User> {
     if (userId) {
       const allUserById = await this.prismaService.user.findUnique({
         where: {

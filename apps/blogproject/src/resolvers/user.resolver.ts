@@ -12,12 +12,12 @@ export class UserResolver{
     return await this.user.getUsers()
   }
   @Query(() => User)
-  async getUser(@Args("id",{type:() => Int}) id:number){
+  async getUser(@Args("id",{type:() => Int}) id:number):Promise<User>{
     return await this.user.getUser(id)
   }
 
   @ResolveField('posts',() => [Blog])
-  async getUserPost(@Parent() user:User){
+  async getUserPost(@Parent() user:User):Promise<Blog[]>{
     const {id} = user
     console.log(id,"here")
     return this.blog.getAllUserPost(id);

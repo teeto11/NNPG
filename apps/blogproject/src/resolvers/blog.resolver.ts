@@ -12,7 +12,7 @@ export class BlogResolver{
    }
 
    @ResolveField(() => User,{name:"user",nullable:true})
-   async user(@Parent() blog:Blog){
+   async user(@Parent() blog:Blog):Promise<User>{
       const {userId} = blog
       console.log(userId,"ID")
       return await this.userService.getUserBlog(userId);
@@ -22,7 +22,7 @@ export class BlogResolver{
    async createPost(
      @Args("title") title:string,
      @Args("postId",{type:() =>Int}) postId:number
-   ){
+   ):Promise<Blog>{
      const data = {
        title,
        postId

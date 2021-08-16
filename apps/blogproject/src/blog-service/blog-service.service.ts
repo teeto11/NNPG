@@ -47,7 +47,7 @@ export class BlogService {
   //   });
   //   return user;
   // }
-  async create(data: Prisma.PostCreateManyInput) {
+  async create(data: Prisma.PostCreateManyInput):Promise<Post> {
     const post = await this.prisma.post.create({
       data: {
         title: data.title,
@@ -67,7 +67,7 @@ export class BlogService {
     return createManyPost;
   }
 
-  async getOne(data: Prisma.PostWhereInput) {
+  async getOne(data: Prisma.PostWhereInput):Promise<Post> {
     const singlePost = await this.prisma.post.findFirst({
       where: {
         title: data.title,
@@ -85,7 +85,7 @@ export class BlogService {
     console.log(allPost);
     return allPost;
   }
-  async getUnique(data: Prisma.PostWhereUniqueInput) {
+  async getUnique(data: Prisma.PostWhereUniqueInput):Promise<Post> {
     const post = await this.prisma.post.findUnique({
       where: {
         id: data.id,
@@ -94,7 +94,7 @@ export class BlogService {
     return post;
   }
 
-  async updatePost(id: number, data: Prisma.PostUpdateInput) {
+  async updatePost(id: number, data: Prisma.PostUpdateInput):Promise<Post> {
     const post = await this.prisma.post.update({
       where: {
         id: Number(id),
@@ -105,7 +105,7 @@ export class BlogService {
     });
     return post;
   }
-  async getAllUserPost(id:number){
+  async getAllUserPost(id:number):Promise<Post[]>{
     const posts = await this.prisma.post.findMany({
       where:{
         userId:id

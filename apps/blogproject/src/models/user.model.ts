@@ -8,6 +8,6 @@ export class User {
   name: string;
   @Field()
   email: string;
-  @Field(() => [Blog])
-  posts: Blog[];
+  // @Field(() => [Blog])
+  // posts: Blog[];
 }
