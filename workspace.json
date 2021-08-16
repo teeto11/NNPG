@@ -1,0 +1,81 @@
+{
+  "version": 2,
+  "projects": {
+    "blogproject": {
+      "root": "apps/blogproject",
+      "sourceRoot": "apps/blogproject/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/blogproject",
+            "main": "apps/blogproject/src/main.ts",
+            "tsConfig": "apps/blogproject/tsconfig.app.json",
+            "assets": ["apps/blogproject/src/assets"],
+            "webpackConfig": "webpack.config.js"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/blogproject/src/environments/environment.ts",
+                  "with": "apps/blogproject/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "blogproject:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/blogproject/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/blogproject"],
+          "options": {
+            "jestConfig": "apps/blogproject/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "prisma": {
+      "root": "libs/prisma",
+      "sourceRoot": "libs/prisma/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/prisma/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/prisma"],
+          "options": {
+            "jestConfig": "libs/prisma/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "blogproject"
+}

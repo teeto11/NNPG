@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Blog {
+  id: Int!
+  postId: Int!
+  title: String!
+  user: User
+}
+
+type Mutation {
+  createPost(postId: Int!, title: String!): Blog!
+}
+
+type Query {
+  findAllPosts: [Blog!]!
+  getAllUsers: [User!]!
+  getUser(id: Int!): User!
+}
+
+type User {
+  email: String!
+  id: Int!
+  name: String!
+  posts: [Blog!]!
+}
